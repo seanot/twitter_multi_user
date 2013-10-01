@@ -21,4 +21,12 @@
     <button><a href="/sign_in">Sign In with Twitter</a></button>
   <% end %>
   
+  <h2>Recent Tweets</h2>
+
+  <table>
+      <form id="get_tweets" action='/tweets' method="POST">
+        <input id="input_box" type="text" name="username" placeholder="enter twitter handle">
+        <input type="submit" value="Get Tweets!">
+    </form>
+  </table>
 </div>

@@ -9,3 +9,18 @@ button a {
   text-decoration: none;
   color: black;
 }
+
+th {
+  text-align: left;
+}
+
+.spinner {
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#spinner {
+  display: block;
+}

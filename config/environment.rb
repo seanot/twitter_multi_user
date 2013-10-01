@@ -17,6 +17,7 @@ require 'logger'
 
 require 'sinatra'
 require 'shotgun'
+require 'pry'
 
 require 'erb'
 
@@ -34,6 +35,13 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
+# Set up twitter oauth
+env_config = YAML.load_file(APP_ROOT.join('config', 'twitter_config.yml'))
+
+env_config.each do |key, value|
+  ENV[key] = value
+end
 
 Twitter.configure do |config|
   config.consumer_key = ENV['TWITTER_KEY']
