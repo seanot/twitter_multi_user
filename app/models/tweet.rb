@@ -17,9 +17,9 @@ class Tweet < ActiveRecord::Base
     tweets_array
   end
 
-  def self.send_tweet(status)
+  def self.send_tweet(status, current_user)
     twitter_user = Twitter::Client.new(oauth_token: current_user.oauth_token,
-                                oauth_token_secret: current_user.oauth_token_secret)
+                                oauth_token_secret: current_user.oauth_secret)
     twitter_user.update(status)
   end
 
