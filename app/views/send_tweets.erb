@@ -1,6 +1,6 @@
   
 
-<form action="/send_tweets">
+<form action="/user/<%= @user.id %>/send_tweets" method="POST">
   <label>Tweet!<input type="text" name="text"></label>
   <input type="submit" value="Submit">
 </form>

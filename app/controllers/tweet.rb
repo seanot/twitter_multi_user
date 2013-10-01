@@ -1,4 +1,5 @@
 get '/send_tweets' do
+  @user = current_user
   erb :send_tweets
 end
 
@@ -27,8 +28,8 @@ post '/tweets' do
   redirect to("/#{params[:username]}")
 end
 
-post '/send_tweets' do
-  Tweet.send_tweet(params[:text])
+post '/user/:id/send_tweets' do
+  Tweet.send_tweet(params[:text], current_user)
   redirect '/'
 end
 
