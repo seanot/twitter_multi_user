@@ -4,12 +4,14 @@ get '/send_tweets' do
 end
 
 get '/' do
+  @user = current_user
   erb :index
 end
 
 get '/:username' do
   if @user = User.find_by_username(params[:username])
-    if Time.now - @user.tweets.first.created_at > 900
+    
+    if @user.tweets && Time.now - @user.tweets.first.created_at > 900
       @user.tweets.destroy_all
       @tweets = Tweet.tweet_getter(@user)
     else

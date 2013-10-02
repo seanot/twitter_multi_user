@@ -26,4 +26,30 @@ $(document).ready(function() {
         });
         this.reset();
     })
+
+    $('#submit_tweet').submit(function(event) {
+        event.preventDefault();
+
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+        })
+        .done(function(response) {
+            console.log("success");
+            console.log(response);
+            // var tweets = $(response).find('p');
+            // $('p')
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        this.reset();
+    })
 });

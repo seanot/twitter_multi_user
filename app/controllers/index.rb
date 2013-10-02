@@ -1,7 +1,3 @@
-get '/' do
-  erb :index
-end
-
 get '/sign_in' do
   # the `request_token` method is defined in `app/helpers/oauth.rb`
   redirect request_token.authorize_url
@@ -21,9 +17,14 @@ get '/auth' do
   # at this point in the code is where you'll need to create your user account and store the access token
   user = User.find_or_create_by_username(:username => @access_token.params[:screen_name],
                                          :oauth_token => @access_token.token, 
-                                         :oauth_secret => @access_token.secret) 
+                                         :oauth_secret => @access_token.secret)
+
+  if user.oauth_token.nil?
+    user.update(oauth_token: @access_token.token, 
+                      oauth_secret: @access_token.secret)
+  end
   session[:user_id] = user.id
-  
-  erb :index
+
+  redirect '/'
   
 end
